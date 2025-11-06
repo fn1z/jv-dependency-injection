@@ -11,6 +11,13 @@ public class Injector {
     private static final String SPACE = " ";
 
     private static final Injector injector = new Injector();
+
+    private static final Map<Class<?>, Class<?>> interfaceToImplementation = Map.of(
+            mate.academy.service.FileReaderService.class, mate.academy.service.impl.FileReaderServiceImpl.class,
+            mate.academy.service.ProductParser.class, mate.academy.service.impl.ProductParserImpl.class,
+            mate.academy.service.ProductService.class, mate.academy.service.impl.ProductServiceImpl.class
+    );
+
     private final Map<Class<?>, Object> instances = new HashMap<>();
 
     private Injector() {
@@ -53,9 +60,10 @@ public class Injector {
         }
     }
 
-    private Class<?> findImplementation(Class<?> interfaceClazz) throws ClassNotFoundException {
-        String interfaceName = interfaceClazz.getSimpleName();
-        String implName = "mate.academy.service.impl." + interfaceName + IMPL;
-        return Class.forName(implName);
+    private Class<?> findImplementation(Class<?> interfaceClazz) {
+        if (interfaceClazz.isInterface()) {
+            return interfaceToImplementation.get(interfaceClazz);
+        }
+        return interfaceClazz;
     }
 }
