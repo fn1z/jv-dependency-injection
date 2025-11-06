@@ -13,9 +13,12 @@ public class Injector {
     private static final Injector injector = new Injector();
 
     private static final Map<Class<?>, Class<?>> interfaceToImplementation = Map.of(
-            mate.academy.service.FileReaderService.class, mate.academy.service.impl.FileReaderServiceImpl.class,
-            mate.academy.service.ProductParser.class, mate.academy.service.impl.ProductParserImpl.class,
-            mate.academy.service.ProductService.class, mate.academy.service.impl.ProductServiceImpl.class
+            mate.academy.service.FileReaderService.class,
+            mate.academy.service.impl.FileReaderServiceImpl.class,
+            mate.academy.service.ProductParser.class,
+            mate.academy.service.impl.ProductParserImpl.class,
+            mate.academy.service.ProductService.class,
+            mate.academy.service.impl.ProductServiceImpl.class
     );
 
     private final Map<Class<?>, Object> instances = new HashMap<>();
